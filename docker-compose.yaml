@@ -1,0 +1,56 @@
+version: '3.6'
+services:
+  datart:
+    environment:
+      - TZ=Asia/Shanghai
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/datart?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=abc123123
+      - SPRING_DATASOURCE_TEST_ON_BORROW=true
+      - SPRING_DATASOURCE_TIME_BETWEEN_EVICTION_RUNS_MILLIS=6000
+      - SPRING_MAIL_HOST=smtp.163.com
+      - SPRING_MAIL_PORT=465
+      - SPRING_MAIL_USERNAME=xxx@163.com
+      - SPRING_MAIL_PASSWORD=xxxxxxxx
+      - SPRING_MAIL_SENDERNAME=Datart
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_SSL_ENABLE=true
+      - DATART_WEBDRIVER_PATH=http://chrome:4444/wd/hub
+      - DATART_SERVER_ADDRESS=http://localhost:58080
+      - DATART_SECURITY_TOKEN_SECRET="d@a$t%a^r&a*t"
+      - SERVER_PORT=8080
+      - SERVER_ADDRESS=0.0.0.0
+    image: "running-elephant/datart:latest"
+    ports:
+      - 58080:8080
+    command: ["./bin/docker-entrypoint.sh", "mysql:3306"]
+    restart: always
+    volumes:
+      - ./config/application-config.yml:/opt/datart/config/application-config.yml
+      - datart_logs:/opt/datart/logs
+      - datart_userfiles:/opt/datart/userfiles
+      - datart_initdb:/initdb
+      # 如果要使用更多数据源，请将驱动挂载到/opt/datart/lib/下面，类似下面
+      # - kylin-jdbc-2.6.3.jar.jar:/opt/datart/lib/kylin-jdbc-2.6.3.jar.jar
+      # - mssql-jdbc-7.0.0.jre8.jar:/opt/datart/lib/mssql-jdbc-7.0.0.jre8.jar
+  chrome:
+    image: selenium/standalone-chrome
+    shm_size: 2g
+    environment:
+      - TZ=Asia/Shanghai
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=abc123123
+      - MYSQL_DATABASE=datart
+    ports:
+      - 49923:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - datart_initdb:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  datart_userfiles:
+  datart_logs:
+  datart_initdb:
+  mysql_data:
