@@ -20,7 +20,8 @@ services:
       - SERVER_PORT=8080
       - SERVER_ADDRESS=0.0.0.0
     #image: "running-elephant/datart:latest"
-    image: "tbcheng/datart"
+    #image: "tbcheng/datart"
+    image: registry.cn-hangzhou.aliyuncs.com/cabbage89/datart
     ports:
       - 58080:8080
     command: ["./bin/docker-entrypoint.sh", "mysql:3306"]
