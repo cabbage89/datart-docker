@@ -4,6 +4,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/datart?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=abc123123
       - SPRING_DATASOURCE_TEST_ON_BORROW=true
@@ -25,7 +26,7 @@ services:
     command: ["./bin/docker-entrypoint.sh", "mysql:3306"]
     restart: always
     volumes:
-      - ./config/application-config.yml:/opt/datart/config/application-config.yml
+      - ./config/application-config.yml:/opt/datart/config/profiles/application-config.yml
       - datart_logs:/opt/datart/logs
       - datart_userfiles:/opt/datart/userfiles
       - datart_initdb:/initdb

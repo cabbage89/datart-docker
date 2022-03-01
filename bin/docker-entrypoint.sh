@@ -19,4 +19,4 @@ done
 
 cd $DATART3_HOME
 
-java -Dfile.encoding=UTF-8 -cp $JAVA_HOME/lib/*:lib/* datart.DatartServerApplication
+java $JAVA_OPTS -Dfile.encoding=UTF-8 -cp .:$JAVA_HOME/lib/*:lib/*:driver/* datart.DatartServerApplication
