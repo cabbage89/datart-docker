@@ -5,8 +5,8 @@ ARG DATART_ZIP
 ADD $DATART_ZIP /
 
 RUN mkdir -p /opt/datart && unzip $DATART_ZIP -d /opt/datart \
-&& rm -rf $DATART_ZIP \
-&& cp -v /opt/datart/config/application-config.yml.example /opt/datart/config/application-config.yml
+&& rm -rf $DATART_ZIP 
+#&& cp -v /opt/datart/config/profiles/application-config.yml /opt/datart/config/profiles/application-config.yml
 
 ADD bin/docker-entrypoint.sh /opt/datart/bin/docker-entrypoint.sh
 

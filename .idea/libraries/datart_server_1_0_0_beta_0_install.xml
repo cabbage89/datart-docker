@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="datart-server-1.0.0-beta.0-install">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/datart-server-1.0.0-beta.0-install.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
