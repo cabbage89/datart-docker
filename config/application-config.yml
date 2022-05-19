@@ -20,6 +20,15 @@ spring:
             client-authentication-method: post
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: userinfo
+          qywx:
+            provider: qywx
+            client-id: "xxxx"
+            client-name: "企业微信客户端登录"
+            client-secret: "xx"
+            authorization-grant-type: authorization_code
+            client-authentication-method: post
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: snsapi_base
         provider:
           cas:
             authorization-uri: https://cas.xxx.com/cas/oauth2.0/authorize
@@ -30,6 +39,15 @@ spring:
               email: "attributes.email"
               name: "attributes.name"
               avatar: "attributes.avatar"
+          qywx:
+            authorization-uri: https://open.weixin.qq.com/connect/oauth2/authorize?appid=xxxxxxxxxxxxxx#wechat_redirect
+            token-uri: http://172.17.0.1:23014/oauth2.0/accessToken
+            user-info-uri: http://172.17.0.1:23014/oauth2.0/profile
+            user-name-attribute: email
+            userMapping:
+              email: "email"
+              name: "name"
+              avatar: "thumb_avatar"
 
 # mail config
 
